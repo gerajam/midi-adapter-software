@@ -122,6 +122,7 @@ void setup() {
   Serial.println("PO-MA");
   Serial.println("Firmware Version");
   Serial.println(FIRMWARE_VERSION);
+  volMax();
 }
 
 void loop() {
@@ -355,4 +356,14 @@ void printMIDI(byte type, byte data1, byte data2, byte channel ){
   Serial.println(data2);
   Serial.println(channel);
   Serial.println(" ");
+}
+
+void volMax() {
+    processMidi(144, 2, 54, 127, 136, true, false);
+    delay(150);
+    processMidi(128, 2, 119, 127, 136, true, false);
+    delay(150);
+    processMidi(144, 2, 119, 0, 136, true, false);
+    delay(150);
+    processMidi(128, 2, 54, 0, 136, true, false);
 }
