@@ -1,0 +1,6 @@
+﻿.vs/
+po_midi_adapter/Release/
+po_midi_adapter/Debug
+po_midi_adapter/__vm
+*vcxproj*
+*.sln
