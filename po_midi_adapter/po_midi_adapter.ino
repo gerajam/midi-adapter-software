@@ -48,6 +48,10 @@ void processMidi(uint8_t type,uint8_t channel , uint8_t data1, uint8_t data2,con
 void processMidiClock();
 void printMIDI(byte type, byte data1, byte data2, byte channel);
 
+// Keepawake variables
+int now = millis();
+int lastactive = now;
+
 void setup() {
   MIDI1.begin(MIDI_CHANNEL_OMNI);
   MIDI2.begin(MIDI_CHANNEL_OMNI);
@@ -187,13 +191,13 @@ void loop() {
     activity = true;
   }
   // blink the LED when any activity has happened
-  if (activity) {
-    digitalWriteFast(13, HIGH); // LED on
-    ledOnMillis = 0;
-  }
-  if (ledOnMillis > 15) {
-    digitalWriteFast(13, LOW);  // LED off
-  }
+  //if (activity) {
+  //  digitalWriteFast(13, HIGH); // LED on
+  //  ledOnMillis = 0;
+  //}
+  //if (ledOnMillis > 15) {
+  //  digitalWriteFast(13, LOW);  // LED off
+  //}
 
   if (MIDI1.read()) {
     // get the Serial IN MIDI message, defined by these 5 numbers (except SysEX)
@@ -260,9 +264,17 @@ void loop() {
   if (activity) {
     digitalWriteFast(13, HIGH); // LED on
     ledOnMillis = 0;
+    // keepawake
+    lastactive = now;
   }
   if (ledOnMillis > 15) {
     digitalWriteFast(13, LOW);  // LED off
+  }
+
+  //keepawake check
+  now = millis();
+  if (now - lastactive > 120000) {
+      volMax();
   }
 }
 
@@ -366,4 +378,5 @@ void volMax() {
     processMidi(144, 2, 119, 0, 136, true, false);
     delay(150);
     processMidi(128, 2, 54, 0, 136, true, false);
+    lastactive = now;
 }
