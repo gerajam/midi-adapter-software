@@ -1,3 +1,21 @@
+//Includes to compile under Visual Micro with 'Deep Search for Libraries' disabled.
+//Speeds up compile time
+#include <SDConfigFile.h>
+
+#include <SPI.h>
+
+//These includes were added with Sdfat automatically
+#include <sdios.h>
+#include <SdFatConfig.h>
+#include <SdFat.h>
+#include <RingBuf.h>
+#include <MinimumSerial.h>
+#include <FreeStack.h>
+#include <BufferedPrint.h>
+
+#include <SD.h>
+
+//Includes from HanzTech
 #include <MIDI.h>        // access to serial (5 pin DIN) MIDI
 #include <USBHost_t36.h> // access to USB MIDI devices (plugged into 2nd USB port)
 #include "po_settings.h"
