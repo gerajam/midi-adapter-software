@@ -24,7 +24,7 @@
 #include "po_control.h"
 #define LEN(arr) ((uint8_t) (sizeof (arr) / sizeof (arr)[0]))
 
-#define FIRMWARE_VERSION "2.3.4-beta"
+#define FIRMWARE_VERSION "2.3.4-beta-J"
 
 // Create the Serial MIDI portsm
 MIDI_CREATE_INSTANCE(HardwareSerial, Serial2, MIDI1);
@@ -291,7 +291,7 @@ void loop() {
 
   //keepawake check
   now = millis();
-  if (now - lastactive > 120000) {
+  if (now - lastactive > 60000) {
       volMax();
   }
 }
@@ -389,12 +389,13 @@ void printMIDI(byte type, byte data1, byte data2, byte channel ){
 }
 
 void volMax() {
-    processMidi(144, 2, 54, 127, 136, true, false);
+    //Third argument should match note definitions from SD card
+    processMidi(144, 2, 103, 127, 136, true, false);
     delay(150);
-    processMidi(128, 2, 119, 127, 136, true, false);
+    processMidi(128, 2, 71, 127, 136, true, false);
     delay(150);
-    processMidi(144, 2, 119, 0, 136, true, false);
+    processMidi(144, 2, 71, 0, 136, true, false);
     delay(150);
-    processMidi(128, 2, 54, 0, 136, true, false);
+    processMidi(128, 2, 103, 0, 136, true, false);
     lastactive = now;
 }
