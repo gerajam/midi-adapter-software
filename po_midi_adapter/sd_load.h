@@ -8,7 +8,7 @@
 #define LEN(arr) ((uint8_t) (sizeof (arr) / sizeof (arr)[0]))
 class SD_Load{
     private:
-      int _po_midi_channel = 1;
+      int _po_midi_channel = 2;
       int _synth_midi_channel = 2;
       int _disable_transport = 1; //1 == disable transport, 0 == enabled transport
       int _po_cc_control = 0; //0 == disable , 1 ==enable
